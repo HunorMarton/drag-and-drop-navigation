@@ -36,7 +36,9 @@ export default function PageNavigation({
   handleAddPage,
   handleReorderPages,
 }: PageNavigationProps) {
-  const [hoveredSpaceId, setHoveredSpaceId] = useState<string | null>(null)
+  const [hoveredSpaceIndex, setHoveredSpaceIndex] = useState<number | null>(
+    null,
+  )
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string)
@@ -72,7 +74,7 @@ export default function PageNavigation({
             <Fragment key={page.id}>
               <div
                 style={{
-                  transform: getPageTransform(index, hoveredSpaceId, pages),
+                  transform: getPageTransform(index, hoveredSpaceIndex),
                   transition: 'transform 300ms ease-out',
                 }}
               >
@@ -87,14 +89,14 @@ export default function PageNavigation({
               </div>
               {index < pages.length - 1 && (
                 <div
-                  onMouseEnter={() => setHoveredSpaceId(page.id)}
-                  onMouseLeave={() => setHoveredSpaceId(null)}
+                  onMouseEnter={() => setHoveredSpaceIndex(index)}
+                  onMouseLeave={() => setHoveredSpaceIndex(null)}
                   className="relative"
                 >
                   <AddPageSpace
                     afterPageId={page.id}
                     onAddPage={handleAddPage}
-                    isHovered={hoveredSpaceId === page.id}
+                    isHovered={hoveredSpaceIndex === index}
                   />
                 </div>
               )}

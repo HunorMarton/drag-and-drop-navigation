@@ -1,17 +1,14 @@
-import { Page } from '../types/page'
-
 export const getPageTransform = (
   pageIndex: number,
-  hoveredSpaceId: string | null,
-  pages: Page[],
+  hoveredSpaceIndex: number | null,
 ) => {
-  if (!hoveredSpaceId) return ''
+  if (hoveredSpaceIndex === null) return ''
 
-  const hoveredIndex = pages.findIndex((page) => page.id === hoveredSpaceId)
-  if (hoveredIndex === -1) return ''
-
-  const distance = Math.abs(pageIndex - hoveredIndex)
-  const direction = pageIndex > hoveredIndex ? 1 : -1
+  const direction = pageIndex > hoveredSpaceIndex ? 1 : -1
+  const distance =
+    direction > 0
+      ? Math.abs(pageIndex - hoveredSpaceIndex)
+      : Math.abs(pageIndex - hoveredSpaceIndex) + 1
 
   // Calculate movement: closer pages move more, farther pages move less
   let movement = 0
