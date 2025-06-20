@@ -24,7 +24,7 @@ import { PageTab } from "./page-tab";
 import { AddPageSpace } from "./add-page-space";
 import { RenameDialog } from "./rename-dialog";
 import { DragOverlay } from "./drag-overlay";
-import { usePageNavigationInternal } from "./hooks/use-page-navigation-internal";
+import { usePageNavigationInternal } from "./hooks/use-page-navigation";
 import type { Page, PageNavigationCallbacks } from "./types/page";
 
 interface PageNavigationProps extends PageNavigationCallbacks {

@@ -175,7 +175,7 @@ function DragOverlay({ draggedPage }) {
   return /* @__PURE__ */ React4.createElement(DndDragOverlay, null, draggedPage && /* @__PURE__ */ React4.createElement("div", { className: "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-white shadow-lg border border-gray-200" }, draggedPage.icon, /* @__PURE__ */ React4.createElement("span", null, draggedPage.name)));
 }
 
-// src/hooks/use-page-navigation-internal.ts
+// src/hooks/use-page-navigation.ts
 import { useState, useCallback } from "react";
 function usePageNavigationInternal(callbacks) {
   const [activeId, setActiveId] = useState(null);

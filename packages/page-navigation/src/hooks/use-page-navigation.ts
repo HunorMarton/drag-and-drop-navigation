@@ -1,10 +1,9 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import type { Page, RenameDialogState } from "../types/page"
+import type { RenameDialogState, PageNavigationCallbacks } from "../types/page"
 
-export function usePageNavigation(initialPages: Page[]) {
-  const [pages, setPages] = useState<Page[]>(initialPages)
+export function usePageNavigationInternal(callbacks: PageNavigationCallbacks) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [renameDialog, setRenameDialog] = useState<RenameDialogState>({
     isOpen: false,
@@ -13,14 +12,13 @@ export function usePageNavigation(initialPages: Page[]) {
   })
   const [newPageName, setNewPageName] = useState("")
 
-  const handleSelectPage = useCallback((id: string) => {
-    setPages((prev) =>
-      prev.map((page) => ({
-        ...page,
-        isActive: page.id === id,
-      })),
-    )
-  }, [])
+  const handleSelectPage = useCallback(
+    (id: string) => {
+      console.log("🎯 Page selected:", { pageId: id })
+      callbacks.onPageSelect(id)
+    },
+    [callbacks],
+  )
 
   const handleRenamePage = useCallback((id: string, currentName: string) => {
     setRenameDialog({ isOpen: true, pageId: id, currentName })
@@ -28,87 +26,56 @@ export function usePageNavigation(initialPages: Page[]) {
   }, [])
 
   const handleConfirmRename = useCallback(() => {
-    if (newPageName.trim()) {
-      setPages((prev) =>
-        prev.map((page) => (page.id === renameDialog.pageId ? { ...page, name: newPageName.trim() } : page)),
-      )
+    if (newPageName.trim() && renameDialog.pageId) {
+      console.log("✏️ Page renamed:", {
+        pageId: renameDialog.pageId,
+        oldName: renameDialog.currentName,
+        newName: newPageName.trim(),
+      })
+      callbacks.onPageRename(renameDialog.pageId, newPageName.trim())
     }
     setRenameDialog({ isOpen: false, pageId: "", currentName: "" })
     setNewPageName("")
-  }, [newPageName, renameDialog.pageId])
+  }, [newPageName, renameDialog, callbacks])
 
   const handleCancelRename = useCallback(() => {
     setRenameDialog({ isOpen: false, pageId: "", currentName: "" })
     setNewPageName("")
   }, [])
 
-  const handleDeletePage = useCallback((id: string) => {
-    setPages((prev) => {
-      const filtered = prev.filter((page) => page.id !== id)
-      // If we deleted the active page, make the first page active
-      if (prev.find((page) => page.id === id)?.isActive && filtered.length > 0) {
-        filtered[0].isActive = true
-      }
-      return filtered
-    })
-  }, [])
+  const handleDeletePage = useCallback(
+    (id: string) => {
+      console.log("🗑️ Page deleted:", { pageId: id })
+      callbacks.onPageDelete(id)
+    },
+    [callbacks],
+  )
 
   const handleDuplicatePage = useCallback(
     (id: string) => {
-      const pageToClone = pages.find((page) => page.id === id)
-      if (pageToClone) {
-        const newPage: Page = {
-          ...pageToClone,
-          id: `${Date.now()}`,
-          name: `${pageToClone.name} Copy`,
-          isActive: false,
-        }
-        setPages((prev) => {
-          const index = prev.findIndex((page) => page.id === id)
-          const newPages = [...prev]
-          newPages.splice(index + 1, 0, newPage)
-          return newPages
-        })
-      }
+      console.log("📋 Page duplicated:", { pageId: id })
+      callbacks.onPageDuplicate(id)
     },
-    [pages],
+    [callbacks],
   )
 
-  const handleAddPage = useCallback((afterId?: string) => {
-    const newPage: Page = {
-      id: `${Date.now()}`,
-      name: "New Page",
-      icon: <div className="w-4 h-4 bg-gray-400 rounded" />, // Default icon
-      isActive: false,
-    }
+  const handleAddPage = useCallback(
+    (afterId?: string) => {
+      console.log("➕ Page added:", { afterPageId: afterId || "end" })
+      callbacks.onPageAdd(afterId)
+    },
+    [callbacks],
+  )
 
-    setPages((prev) => {
-      if (!afterId) {
-        return [...prev, newPage]
-      }
-
-      const index = prev.findIndex((page) => page.id === afterId)
-      const newPages = [...prev]
-      newPages.splice(index + 1, 0, newPage)
-      return newPages
-    })
-  }, [])
-
-  const handleReorderPages = useCallback((activeId: string, overId: string) => {
-    setPages((items) => {
-      const oldIndex = items.findIndex((item) => item.id === activeId)
-      const newIndex = items.findIndex((item) => item.id === overId)
-
-      const newItems = [...items]
-      const [reorderedItem] = newItems.splice(oldIndex, 1)
-      newItems.splice(newIndex, 0, reorderedItem)
-
-      return newItems
-    })
-  }, [])
+  const handleReorderPages = useCallback(
+    (activeId: string, overId: string) => {
+      console.log("🔄 Pages reordered:", { activeId, overId })
+      callbacks.onPageReorder(activeId, overId)
+    },
+    [callbacks],
+  )
 
   return {
-    pages,
     activeId,
     setActiveId,
     renameDialog,
