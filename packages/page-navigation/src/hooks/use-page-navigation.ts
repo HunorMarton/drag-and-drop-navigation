@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import type { RenameDialogState, PageNavigationCallbacks } from '../types/page'
+import { useCallback, useState } from 'react'
+import type { PageNavigationCallbacks, RenameDialogState } from '../types/page'
 
 export function usePageNavigationInternal(callbacks: PageNavigationCallbacks) {
-  const [activeId, setActiveId] = useState<string | null>(null)
   const [renameDialog, setRenameDialog] = useState<RenameDialogState>({
     isOpen: false,
     pageId: '',
@@ -67,17 +66,7 @@ export function usePageNavigationInternal(callbacks: PageNavigationCallbacks) {
     [callbacks],
   )
 
-  const handleReorderPages = useCallback(
-    (activeId: string, overId: string) => {
-      console.log('🔄 Pages reordered:', { activeId, overId })
-      callbacks.onPageReorder(activeId, overId)
-    },
-    [callbacks],
-  )
-
   return {
-    activeId,
-    setActiveId,
     renameDialog,
     newPageName,
     setNewPageName,
@@ -88,6 +77,5 @@ export function usePageNavigationInternal(callbacks: PageNavigationCallbacks) {
     handleDeletePage,
     handleDuplicatePage,
     handleAddPage,
-    handleReorderPages,
   }
 }

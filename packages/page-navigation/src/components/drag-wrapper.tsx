@@ -10,19 +10,14 @@ import {
 } from '@dnd-kit/core'
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import type { ReactNode } from 'react'
-import { Page } from '../types/page'
 import { DragOverlay } from './drag-overlay'
 
-export function DragContext({
+export function DragWrapper({
   children,
-  handleDragStart,
-  handleDragEnd,
-  draggedPage,
+  handleReorderPages,
 }: {
   children: ReactNode
-  handleDragStart: (event: DragStartEvent) => void
-  handleDragEnd: (event: DragEndEvent) => void
-  draggedPage: Page | null
+  handleReorderPages: (activeId: string, overId: string) => void
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -35,6 +30,21 @@ export function DragContext({
     }),
   )
 
+  const handleDragStart = (event: DragStartEvent) => {
+    console.log('handleDragStart', event.active.id as string)
+  }
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    console.log('handleDragEnd', active, over)
+
+    if (!over) return
+
+    if (active.id !== over.id) {
+      handleReorderPages(active.id as string, over.id as string)
+    }
+  }
+
   return (
     <DndContext
       sensors={sensors}
@@ -43,7 +53,7 @@ export function DragContext({
       onDragEnd={handleDragEnd}
     >
       <div className="flex items-center">{children}</div>
-      <DragOverlay draggedPage={draggedPage} />
+      <DragOverlay />
     </DndContext>
   )
 }

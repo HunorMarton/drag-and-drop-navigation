@@ -26,8 +26,6 @@ export default function Root({
   }
 
   const {
-    activeId,
-    setActiveId,
     renameDialog,
     newPageName,
     setNewPageName,
@@ -38,21 +36,18 @@ export default function Root({
     handleDeletePage,
     handleDuplicatePage,
     handleAddPage,
-    handleReorderPages,
   } = usePageNavigationInternal(callbacks)
 
   return (
     <div className="w-full bg-white border-b border-gray-200 px-6 py-3">
       <PageNavigation
         pages={pages}
-        activeId={activeId}
-        setActiveId={setActiveId}
         handleSelectPage={handleSelectPage}
         handleRenamePage={handleRenamePage}
         handleDeletePage={handleDeletePage}
         handleDuplicatePage={handleDuplicatePage}
         handleAddPage={handleAddPage}
-        handleReorderPages={handleReorderPages}
+        onPageReorder={onPageReorder}
       />
       <RenameDialog
         state={renameDialog}

@@ -1,6 +1,5 @@
 'use client'
 
-import { type DragEndEvent, type DragStartEvent } from '@dnd-kit/core'
 import {
   SortableContext,
   horizontalListSortingStrategy,
@@ -10,61 +9,34 @@ import type { Page } from '../types/page'
 import { getPageTransform } from '../utils/get-page-transform'
 import { AddPage } from './add-page'
 import { AddPageSpace } from './add-page-space'
-import { DragContext } from './drag-context'
+import { DragWrapper } from './drag-wrapper'
 import { PageTab } from './page-tab'
 
 interface PageNavigationProps {
   pages: Page[]
-  activeId: string | null
-  setActiveId: (id: string | null) => void
   handleSelectPage: (id: string) => void
   handleRenamePage: (id: string, currentName: string) => void
   handleDeletePage: (id: string) => void
   handleDuplicatePage: (id: string) => void
   handleAddPage: () => void
-  handleReorderPages: (activeId: string, overId: string) => void
+  onPageReorder: (draggedPageId: string, overId: string) => void
 }
 
 export default function PageNavigation({
   pages,
-  activeId,
-  setActiveId,
   handleSelectPage,
   handleRenamePage,
   handleDeletePage,
   handleDuplicatePage,
   handleAddPage,
-  handleReorderPages,
+  onPageReorder,
 }: PageNavigationProps) {
   const [hoveredSpaceIndex, setHoveredSpaceIndex] = useState<number | null>(
     null,
   )
 
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-  }
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    setActiveId(null)
-
-    if (!over) return
-
-    if (active.id !== over.id) {
-      handleReorderPages(active.id as string, over.id as string)
-    }
-  }
-
-  const draggedPage = activeId
-    ? pages.find((page) => page.id === activeId) || null
-    : null
-
   return (
-    <DragContext
-      handleDragStart={handleDragStart}
-      handleDragEnd={handleDragEnd}
-      draggedPage={draggedPage}
-    >
+    <DragWrapper handleReorderPages={onPageReorder}>
       <SortableContext
         items={pages.map((p) => p.id)}
         strategy={horizontalListSortingStrategy}
@@ -84,7 +56,6 @@ export default function PageNavigation({
                   onRename={handleRenamePage}
                   onDelete={handleDeletePage}
                   onDuplicate={handleDuplicatePage}
-                  isDragging={!!activeId}
                 />
               </div>
               {index < pages.length - 1 && (
@@ -106,6 +77,6 @@ export default function PageNavigation({
       </SortableContext>
 
       <AddPage handleAddPage={handleAddPage} />
-    </DragContext>
+    </DragWrapper>
   )
 }

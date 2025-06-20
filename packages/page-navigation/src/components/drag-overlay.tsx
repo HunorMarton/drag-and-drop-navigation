@@ -1,19 +1,16 @@
 'use client'
 
-import { DragOverlay as DndDragOverlay } from '@dnd-kit/core'
-import type { Page } from '../types/page'
+import { DragOverlay as DndDragOverlay, useDndContext } from '@dnd-kit/core'
 
-interface DragOverlayProps {
-  draggedPage: Page | null
-}
+export function DragOverlay() {
+  const { active } = useDndContext()
 
-export function DragOverlay({ draggedPage }: DragOverlayProps) {
   return (
     <DndDragOverlay>
-      {draggedPage && (
+      {active && (
         <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-white shadow-lg border border-gray-200">
-          {draggedPage.icon}
-          <span>{draggedPage.name}</span>
+          {active.data.current?.icon}
+          <span>{active.data.current?.name}</span>
         </div>
       )}
     </DndDragOverlay>

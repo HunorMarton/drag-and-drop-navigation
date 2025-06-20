@@ -9,7 +9,7 @@ import {
   ContextMenuTrigger,
 } from '@workspace/ui'
 import { Copy, Edit2, Trash2 } from 'lucide-react'
-import type { KeyboardEvent, MouseEvent } from 'react'
+import { type KeyboardEvent, type MouseEvent } from 'react'
 import type { Page } from '../types/page'
 
 interface PageTabProps {
@@ -18,7 +18,6 @@ interface PageTabProps {
   onRename: (id: string, newName: string) => void
   onDelete: (id: string) => void
   onDuplicate: (id: string) => void
-  isDragging?: boolean
 }
 
 export function PageTab({
@@ -27,7 +26,6 @@ export function PageTab({
   onRename,
   onDelete,
   onDuplicate,
-  isDragging,
 }: PageTabProps) {
   const {
     attributes,
@@ -35,13 +33,13 @@ export function PageTab({
     setNodeRef,
     transform,
     transition,
-    isDragging: isSortableDragging,
-  } = useSortable({ id: page.id })
+    isDragging,
+  } = useSortable({ id: page.id, data: { icon: page.icon, name: page.name } })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isSortableDragging ? 0.5 : 1,
+    opacity: isDragging ? 0.5 : 1,
   }
 
   const handleClick = (e: MouseEvent | KeyboardEvent) => {
@@ -65,7 +63,7 @@ export function PageTab({
                 ? 'bg-orange-50 text-orange-700 border border-orange-200'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }
-            ${isSortableDragging ? 'shadow-lg z-50' : ''}
+            ${isDragging ? 'shadow-lg z-50' : ''}
           `}
           onClick={handleClick}
           onKeyDown={(e) => {
