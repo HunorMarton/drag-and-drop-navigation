@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { DragOverlay as DndDragOverlay } from "@dnd-kit/core";
-import type { Page } from "./types/page";
+import type { Page } from "../types/page";
 
 interface DragOverlayProps {
   draggedPage: Page | null;

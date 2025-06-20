@@ -10,7 +10,7 @@ import {
   Label,
 } from "@workspace/ui";
 import { Input } from "@workspace/ui";
-import type { RenameDialogState } from "./types/page";
+import type { RenameDialogState } from "../types/page";
 
 interface RenameDialogProps {
   state: RenameDialogState;

@@ -1,5 +1,5 @@
 // Main component
-export { default as PageNavigation } from "./page-navigation";
+export { default as PageNavigation } from "./root";
 
 // Types
 export type {

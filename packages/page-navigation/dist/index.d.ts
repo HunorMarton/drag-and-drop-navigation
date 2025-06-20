@@ -21,9 +21,9 @@ type PageNavigationCallbacks = {
     onPageDuplicate: (pageId: string) => void;
 };
 
-interface PageNavigationProps extends PageNavigationCallbacks {
+interface RootProps extends PageNavigationCallbacks {
     pages: Page[];
 }
-declare function PageNavigation({ pages, onPageSelect, onPageAdd, onPageReorder, onPageRename, onPageDelete, onPageDuplicate, }: PageNavigationProps): React.JSX.Element;
+declare function Root({ pages, onPageSelect, onPageAdd, onPageReorder, onPageRename, onPageDelete, onPageDuplicate, }: RootProps): React.JSX.Element;
 
-export { type Page, PageNavigation, type PageNavigationCallbacks, type RenameDialogState };
+export { type Page, Root as PageNavigation, type PageNavigationCallbacks, type RenameDialogState };

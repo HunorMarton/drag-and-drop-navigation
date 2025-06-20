@@ -10,7 +10,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@workspace/ui";
-import type { Page } from "./types/page";
+import type { Page } from "../types/page";
 
 interface PageTabProps {
   page: Page;
