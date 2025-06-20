@@ -1,3 +1,4 @@
+import { AddPage } from './components/add-page'
 import PageNavigation from './components/page-navigation'
 import { RenameDialog } from './components/rename-dialog'
 import { usePageNavigationInternal } from './hooks/use-page-navigation'
@@ -40,15 +41,18 @@ export default function Root({
 
   return (
     <div className="w-full bg-white border-b border-gray-200 px-6 py-3">
-      <PageNavigation
-        pages={pages}
-        handleSelectPage={handleSelectPage}
-        handleRenamePage={handleRenamePage}
-        handleDeletePage={handleDeletePage}
-        handleDuplicatePage={handleDuplicatePage}
-        handleAddPage={handleAddPage}
-        onPageReorder={onPageReorder}
-      />
+      <div className="flex flex-row items-center">
+        <PageNavigation
+          pages={pages}
+          handleSelectPage={handleSelectPage}
+          handleRenamePage={handleRenamePage}
+          handleDeletePage={handleDeletePage}
+          handleDuplicatePage={handleDuplicatePage}
+          handleAddPage={handleAddPage}
+          onPageReorder={onPageReorder}
+        />
+        <AddPage handleAddPage={handleAddPage} />
+      </div>
       <RenameDialog
         state={renameDialog}
         newPageName={newPageName}

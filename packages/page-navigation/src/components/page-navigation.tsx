@@ -1,15 +1,10 @@
 'use client'
 
-import {
-  SortableContext,
-  horizontalListSortingStrategy,
-} from '@dnd-kit/sortable'
 import { Fragment, useState } from 'react'
 import type { Page } from '../types/page'
 import { getPageTransform } from '../utils/get-page-transform'
-import { AddPage } from './add-page'
 import { AddPageSpace } from './add-page-space'
-import { DragWrapper } from './drag-wrapper'
+import { DragContext } from './drag-context'
 import { PageTab } from './page-tab'
 
 interface PageNavigationProps {
@@ -36,47 +31,38 @@ export default function PageNavigation({
   )
 
   return (
-    <DragWrapper handleReorderPages={onPageReorder}>
-      <SortableContext
-        items={pages.map((p) => p.id)}
-        strategy={horizontalListSortingStrategy}
-      >
-        <div className="flex items-center">
-          {pages.map((page, index) => (
-            <Fragment key={page.id}>
-              <div
-                style={{
-                  transform: getPageTransform(index, hoveredSpaceIndex),
-                  transition: 'transform 300ms ease-out',
-                }}
-              >
-                <PageTab
-                  page={page}
-                  onSelect={handleSelectPage}
-                  onRename={handleRenamePage}
-                  onDelete={handleDeletePage}
-                  onDuplicate={handleDuplicatePage}
-                />
-              </div>
-              {index < pages.length - 1 && (
-                <div
-                  onMouseEnter={() => setHoveredSpaceIndex(index)}
-                  onMouseLeave={() => setHoveredSpaceIndex(null)}
-                  className="relative"
-                >
-                  <AddPageSpace
-                    afterPageId={page.id}
-                    onAddPage={handleAddPage}
-                    isHovered={hoveredSpaceIndex === index}
-                  />
-                </div>
-              )}
-            </Fragment>
-          ))}
-        </div>
-      </SortableContext>
-
-      <AddPage handleAddPage={handleAddPage} />
-    </DragWrapper>
+    <DragContext pages={pages} handleReorderPages={onPageReorder}>
+      {pages.map((page, index) => (
+        <Fragment key={page.id}>
+          <div
+            style={{
+              transform: getPageTransform(index, hoveredSpaceIndex),
+              transition: 'transform 300ms ease-out',
+            }}
+          >
+            <PageTab
+              page={page}
+              onSelect={handleSelectPage}
+              onRename={handleRenamePage}
+              onDelete={handleDeletePage}
+              onDuplicate={handleDuplicatePage}
+            />
+          </div>
+          {index < pages.length - 1 && (
+            <div
+              onMouseEnter={() => setHoveredSpaceIndex(index)}
+              onMouseLeave={() => setHoveredSpaceIndex(null)}
+              className="relative"
+            >
+              <AddPageSpace
+                afterPageId={page.id}
+                onAddPage={handleAddPage}
+                isHovered={hoveredSpaceIndex === index}
+              />
+            </div>
+          )}
+        </Fragment>
+      ))}
+    </DragContext>
   )
 }
