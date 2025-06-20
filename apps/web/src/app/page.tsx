@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { PageNavigation } from "@workspace/page-navigation";
-import { usePageStore } from "../stores/page-store";
+import { PageNavigation } from '@workspace/page-navigation'
+import { usePageStore } from '../stores/page-store'
 
 export default function Home() {
   const {
@@ -12,7 +12,7 @@ export default function Home() {
     renamePage,
     deletePage,
     duplicatePage,
-  } = usePageStore();
+  } = usePageStore()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -43,11 +43,11 @@ export default function Home() {
                 isActive: p.isActive,
               })),
               null,
-              2
+              2,
             )}
           </pre>
         </div>
       </div>
     </div>
-  );
+  )
 }

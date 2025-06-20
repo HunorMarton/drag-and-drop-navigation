@@ -1,19 +1,16 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Page Navigation Demo",
-  description: "A drag-and-drop page navigation component demo",
-};
+  title: 'Page Navigation Demo',
+  description: 'A drag-and-drop page navigation component demo',
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  );
+  )
 }

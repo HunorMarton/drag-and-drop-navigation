@@ -1,12 +1,12 @@
-"use client";
-import * as React from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@workspace/ui";
+'use client'
+
+import { Button } from '@workspace/ui'
+import { Plus } from 'lucide-react'
 
 interface AddPageSpaceProps {
-  afterPageId: string;
-  onAddPage: (afterId: string) => void;
-  isHovered?: boolean;
+  afterPageId: string
+  onAddPage: (afterId: string) => void
+  isHovered?: boolean
 }
 
 export function AddPageSpace({
@@ -23,7 +23,7 @@ export function AddPageSpace({
       <div
         className={`
           transition-all duration-300 ease-out flex items-center justify-center
-          ${isHovered ? "w-10" : "w-2"}
+          ${isHovered ? 'w-10' : 'w-2'}
         `}
       >
         {/* Add button with smooth appearance */}
@@ -32,8 +32,8 @@ export function AddPageSpace({
             transition-all duration-300 ease-out
             ${
               isHovered
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-75 pointer-events-none"
+                ? 'opacity-100 scale-100'
+                : 'opacity-0 scale-75 pointer-events-none'
             }
           `}
         >
@@ -48,5 +48,5 @@ export function AddPageSpace({
         </div>
       </div>
     </div>
-  );
+  )
 }

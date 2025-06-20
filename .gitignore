@@ -4,11 +4,9 @@
 /node_modules
 
 # next.js
-/.next/
-/out/
-
-# production
-/build
+.next/
+**/.next
+out/
 
 # debug
 npm-debug.log*
@@ -25,3 +23,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Production builds
+**/dist/
+**/build/
+
+# Editor directories and files
+.vscode/*
+.DS_Store
+
+# Turbo
+.turbo

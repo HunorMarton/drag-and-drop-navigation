@@ -1,27 +1,27 @@
-import { Page } from "../types/page";
+import { Page } from '../types/page'
 
 export const getPageTransform = (
   pageIndex: number,
   hoveredSpaceId: string | null,
-  pages: Page[]
+  pages: Page[],
 ) => {
-  if (!hoveredSpaceId) return "";
+  if (!hoveredSpaceId) return ''
 
-  const hoveredIndex = pages.findIndex((page) => page.id === hoveredSpaceId);
-  if (hoveredIndex === -1) return "";
+  const hoveredIndex = pages.findIndex((page) => page.id === hoveredSpaceId)
+  if (hoveredIndex === -1) return ''
 
-  const distance = Math.abs(pageIndex - hoveredIndex);
-  const direction = pageIndex > hoveredIndex ? 1 : -1;
+  const distance = Math.abs(pageIndex - hoveredIndex)
+  const direction = pageIndex > hoveredIndex ? 1 : -1
 
   // Calculate movement: closer pages move more, farther pages move less
-  let movement = 0;
+  let movement = 0
   if (distance === 1) {
-    movement = 8 * direction; // Adjacent pages move 8px
+    movement = 8 * direction // Adjacent pages move 8px
   } else if (distance === 2) {
-    movement = 4 * direction; // Next pages move 4px
+    movement = 4 * direction // Next pages move 4px
   } else if (distance === 3) {
-    movement = 2 * direction; // Further pages move 2px
+    movement = 2 * direction // Further pages move 2px
   }
 
-  return `translateX(${movement}px)`;
-};
+  return `translateX(${movement}px)`
+}

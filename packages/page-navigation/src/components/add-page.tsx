@@ -1,6 +1,5 @@
-import * as React from "react";
-import { Button } from "@workspace/ui";
-import { Plus } from "lucide-react";
+import { Button } from '@workspace/ui'
+import { Plus } from 'lucide-react'
 
 export const AddPage = ({ handleAddPage }: { handleAddPage: () => void }) => {
   return (
@@ -15,5 +14,5 @@ export const AddPage = ({ handleAddPage }: { handleAddPage: () => void }) => {
         Add page
       </Button>
     </div>
-  );
-};
+  )
+}

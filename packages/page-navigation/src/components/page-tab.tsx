@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { Edit2, Trash2, Copy } from "lucide-react";
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from "@workspace/ui";
-import type { Page } from "../types/page";
+} from '@workspace/ui'
+import { Copy, Edit2, Trash2 } from 'lucide-react'
+import type { KeyboardEvent, MouseEvent } from 'react'
+import type { Page } from '../types/page'
 
 interface PageTabProps {
-  page: Page;
-  onSelect: (id: string) => void;
-  onRename: (id: string, newName: string) => void;
-  onDelete: (id: string) => void;
-  onDuplicate: (id: string) => void;
-  isDragging?: boolean;
+  page: Page
+  onSelect: (id: string) => void
+  onRename: (id: string, newName: string) => void
+  onDelete: (id: string) => void
+  onDuplicate: (id: string) => void
+  isDragging?: boolean
 }
 
 export function PageTab({
@@ -36,25 +36,25 @@ export function PageTab({
     transform,
     transition,
     isDragging: isSortableDragging,
-  } = useSortable({ id: page.id });
+  } = useSortable({ id: page.id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isSortableDragging ? 0.5 : 1,
-  };
+  }
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = (e: MouseEvent | KeyboardEvent) => {
+    e.preventDefault()
     if (!isDragging) {
-      onSelect(page.id);
+      onSelect(page.id)
     }
-  };
+  }
 
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <div
+        <button
           ref={setNodeRef}
           style={style}
           className={`
@@ -62,18 +62,23 @@ export function PageTab({
             transition-all duration-200 select-none touch-none
             ${
               page.isActive
-                ? "bg-orange-50 text-orange-700 border border-orange-200"
-                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                ? 'bg-orange-50 text-orange-700 border border-orange-200'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }
-            ${isSortableDragging ? "shadow-lg z-50" : ""}
+            ${isSortableDragging ? 'shadow-lg z-50' : ''}
           `}
           onClick={handleClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleClick(e)
+            }
+          }}
           {...attributes}
           {...listeners}
         >
           {page.icon}
           <span>{page.name}</span>
-        </div>
+        </button>
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem onClick={() => onRename(page.id, page.name)}>
@@ -93,5 +98,5 @@ export function PageTab({
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
-  );
+  )
 }

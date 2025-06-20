@@ -1,23 +1,23 @@
-"use client";
-import * as React from "react";
+'use client'
+
 import {
+  Button,
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-  Button,
+  Input,
   Label,
-} from "@workspace/ui";
-import { Input } from "@workspace/ui";
-import type { RenameDialogState } from "../types/page";
+} from '@workspace/ui'
+import type { RenameDialogState } from '../types/page'
 
 interface RenameDialogProps {
-  state: RenameDialogState;
-  newPageName: string;
-  onNewPageNameChange: (name: string) => void;
-  onConfirm: () => void;
-  onCancel: () => void;
+  state: RenameDialogState
+  newPageName: string
+  onNewPageNameChange: (name: string) => void
+  onConfirm: () => void
+  onCancel: () => void
 }
 
 export function RenameDialog({
@@ -40,8 +40,7 @@ export function RenameDialog({
               id="page-name"
               value={newPageName}
               onChange={(e) => onNewPageNameChange(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && onConfirm()}
-              autoFocus
+              onKeyDown={(e) => e.key === 'Enter' && onConfirm()}
             />
           </div>
         </div>
@@ -53,5 +52,5 @@ export function RenameDialog({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

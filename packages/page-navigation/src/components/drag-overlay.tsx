@@ -1,10 +1,10 @@
-"use client";
-import * as React from "react";
-import { DragOverlay as DndDragOverlay } from "@dnd-kit/core";
-import type { Page } from "../types/page";
+'use client'
+
+import { DragOverlay as DndDragOverlay } from '@dnd-kit/core'
+import type { Page } from '../types/page'
 
 interface DragOverlayProps {
-  draggedPage: Page | null;
+  draggedPage: Page | null
 }
 
 export function DragOverlay({ draggedPage }: DragOverlayProps) {
@@ -17,5 +17,5 @@ export function DragOverlay({ draggedPage }: DragOverlayProps) {
         </div>
       )}
     </DndDragOverlay>
-  );
+  )
 }

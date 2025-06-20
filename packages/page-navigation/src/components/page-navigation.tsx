@@ -1,30 +1,28 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { useState } from "react";
-
-import { type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
+import { type DragEndEvent, type DragStartEvent } from '@dnd-kit/core'
 import {
   SortableContext,
   horizontalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { PageTab } from "./page-tab";
-import { AddPageSpace } from "./add-page-space";
-import type { Page } from "../types/page";
-import { getPageTransform } from "../utils/get-page-transform";
-import { AddPage } from "./add-page";
-import { DragContext } from "./drag-context";
+} from '@dnd-kit/sortable'
+import { Fragment, useState } from 'react'
+import type { Page } from '../types/page'
+import { getPageTransform } from '../utils/get-page-transform'
+import { AddPage } from './add-page'
+import { AddPageSpace } from './add-page-space'
+import { DragContext } from './drag-context'
+import { PageTab } from './page-tab'
 
 interface PageNavigationProps {
-  pages: Page[];
-  activeId: string | null;
-  setActiveId: (id: string | null) => void;
-  handleSelectPage: (id: string) => void;
-  handleRenamePage: (id: string, currentName: string) => void;
-  handleDeletePage: (id: string) => void;
-  handleDuplicatePage: (id: string) => void;
-  handleAddPage: () => void;
-  handleReorderPages: (activeId: string, overId: string) => void;
+  pages: Page[]
+  activeId: string | null
+  setActiveId: (id: string | null) => void
+  handleSelectPage: (id: string) => void
+  handleRenamePage: (id: string, currentName: string) => void
+  handleDeletePage: (id: string) => void
+  handleDuplicatePage: (id: string) => void
+  handleAddPage: () => void
+  handleReorderPages: (activeId: string, overId: string) => void
 }
 
 export default function PageNavigation({
@@ -38,26 +36,26 @@ export default function PageNavigation({
   handleAddPage,
   handleReorderPages,
 }: PageNavigationProps) {
-  const [hoveredSpaceId, setHoveredSpaceId] = useState<string | null>(null);
+  const [hoveredSpaceId, setHoveredSpaceId] = useState<string | null>(null)
 
   const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string);
-  };
+    setActiveId(event.active.id as string)
+  }
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
-    setActiveId(null);
+    const { active, over } = event
+    setActiveId(null)
 
-    if (!over) return;
+    if (!over) return
 
     if (active.id !== over.id) {
-      handleReorderPages(active.id as string, over.id as string);
+      handleReorderPages(active.id as string, over.id as string)
     }
-  };
+  }
 
   const draggedPage = activeId
     ? pages.find((page) => page.id === activeId) || null
-    : null;
+    : null
 
   return (
     <DragContext
@@ -71,11 +69,11 @@ export default function PageNavigation({
       >
         <div className="flex items-center">
           {pages.map((page, index) => (
-            <React.Fragment key={page.id}>
+            <Fragment key={page.id}>
               <div
                 style={{
                   transform: getPageTransform(index, hoveredSpaceId, pages),
-                  transition: "transform 300ms ease-out",
+                  transition: 'transform 300ms ease-out',
                 }}
               >
                 <PageTab
@@ -100,12 +98,12 @@ export default function PageNavigation({
                   />
                 </div>
               )}
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
       </SortableContext>
 
       <AddPage handleAddPage={handleAddPage} />
     </DragContext>
-  );
+  )
 }

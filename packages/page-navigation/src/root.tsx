@@ -1,11 +1,10 @@
-import * as React from "react";
-import { RenameDialog } from "./components/rename-dialog";
-import { usePageNavigationInternal } from "./hooks/use-page-navigation";
-import type { Page, PageNavigationCallbacks } from "./types/page";
-import PageNavigation from "./components/page-navigation";
+import PageNavigation from './components/page-navigation'
+import { RenameDialog } from './components/rename-dialog'
+import { usePageNavigationInternal } from './hooks/use-page-navigation'
+import type { Page, PageNavigationCallbacks } from './types/page'
 
 interface RootProps extends PageNavigationCallbacks {
-  pages: Page[];
+  pages: Page[]
 }
 
 export default function Root({
@@ -24,7 +23,7 @@ export default function Root({
     onPageRename,
     onPageDelete,
     onPageDuplicate,
-  };
+  }
 
   const {
     activeId,
@@ -40,7 +39,7 @@ export default function Root({
     handleDuplicatePage,
     handleAddPage,
     handleReorderPages,
-  } = usePageNavigationInternal(callbacks);
+  } = usePageNavigationInternal(callbacks)
 
   return (
     <div className="w-full bg-white border-b border-gray-200 px-6 py-3">
@@ -63,5 +62,5 @@ export default function Root({
         onCancel={handleCancelRename}
       />
     </div>
-  );
+  )
 }
