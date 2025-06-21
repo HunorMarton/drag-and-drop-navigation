@@ -7,9 +7,10 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
+  cn,
 } from '@workspace/ui'
-import { Copy, Edit2, Trash2 } from 'lucide-react'
-import { type KeyboardEvent, type MouseEvent } from 'react'
+import { Copy, Edit2, MoreVertical, Trash2 } from 'lucide-react'
+import React, { type KeyboardEvent, type MouseEvent } from 'react'
 import type { Page } from '../types/page'
 
 interface PageTabProps {
@@ -49,22 +50,33 @@ export function PageTab({
     }
   }
 
+  const iconWithState =
+    page.icon && React.isValidElement(page.icon)
+      ? React.cloneElement(page.icon as React.ReactElement<any>, {
+          className: cn(
+            'w-5 h-5 transition-colors',
+            page.isActive ? 'text-orange-500' : 'text-gray-400',
+          ),
+        })
+      : null
+
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
         <button
           ref={setNodeRef}
           style={style}
-          className={`
-            flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer
-            transition-all duration-200 select-none touch-none
-            ${
-              page.isActive
-                ? 'bg-orange-50 text-orange-700 border border-orange-200'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-            }
-            ${isDragging ? 'shadow-lg z-50' : ''}
-          `}
+          className={cn(
+            'flex items-center justify-between w-full gap-2 h-8 px-2.5 rounded-lg text-sm font-medium',
+            'transition-all duration-200 select-none touch-none',
+            'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+            page.isActive
+              ? 'bg-white text-gray-800 shadow-sm border border-gray-200'
+              : 'bg-gray-100 text-gray-500 hover:bg-gray-200',
+            {
+              'shadow-lg z-50': isDragging,
+            },
+          )}
           onClick={handleClick}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -74,8 +86,11 @@ export function PageTab({
           {...attributes}
           {...listeners}
         >
-          {page.icon}
-          <span>{page.name}</span>
+          <div className="flex items-center gap-1.5">
+            {iconWithState}
+            <span>{page.name}</span>
+          </div>
+          {page.isActive && <MoreVertical className="w-4 h-4 text-gray-400" />}
         </button>
       </ContextMenuTrigger>
       <ContextMenuContent>

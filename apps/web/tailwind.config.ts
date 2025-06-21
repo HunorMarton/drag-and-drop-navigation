@@ -1,15 +1,25 @@
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/page-navigation/src/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    '../../packages/ui/src/**/*.{ts,tsx}',
+    '../../packages/page-navigation/src/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+      },
+      lineHeight: {
+        tight: '1.25rem', // 20px
+        snug: '1rem', // 16px
+      },
+      letterSpacing: {
+        tighter: '-0.015em', // -1.5%
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

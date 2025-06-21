@@ -54,11 +54,7 @@ export default function PageNavigation({
               onMouseLeave={() => setHoveredSpaceIndex(null)}
               className="relative"
             >
-              <AddPageSpace
-                afterPageId={page.id}
-                onAddPage={handleAddPage}
-                isHovered={hoveredSpaceIndex === index}
-              />
+              <AddPageSpace afterPageId={page.id} onAddPage={handleAddPage} />
             </div>
           )}
         </Fragment>
