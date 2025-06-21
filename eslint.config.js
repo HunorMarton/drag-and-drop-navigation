@@ -31,9 +31,6 @@ export default [
       react: {
         version: 'detect',
       },
-      next: {
-        rootDir: 'apps/web',
-      },
     },
     plugins: {
       '@typescript-eslint': typescript,

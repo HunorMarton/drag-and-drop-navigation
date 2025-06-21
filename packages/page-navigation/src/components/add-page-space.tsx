@@ -10,20 +10,16 @@ interface AddPageSpaceProps {
 
 export function AddPageSpace({ afterPageId, onAddPage }: AddPageSpaceProps) {
   return (
-    <div className="relative flex items-center justify-center group">
+    <div className="add-page-space relative flex items-center justify-center group">
       {/* Large invisible hover area for better UX */}
       <div className="absolute w-12 h-10 -mx-6 z-10" />
 
       {/* Spacer that expands when hovered */}
-      <div
-        className={cn(
-          'transition-all duration-300 ease-out flex items-center justify-center',
-          'w-5 group-hover:w-10 group-focus:w-10 group-focus-within:w-10',
-        )}
-      >
+      <div className="flex items-center justify-center w-4">
         {/* Add button with smooth appearance */}
         <div
           className={cn(
+            'flex items-center justify-center',
             'transition-all duration-300 ease-out',
             'opacity-0 scale-75 pointer-events-none',
             'group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto',

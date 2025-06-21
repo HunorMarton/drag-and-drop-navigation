@@ -63,7 +63,7 @@ export function DragContext({
         items={pages.map((p) => p.id)}
         strategy={horizontalListSortingStrategy}
       >
-        <div className="flex items-center">{children}</div>
+        <div className="flex flex-row items-center">{children}</div>
       </SortableContext>
       <DragOverlay />
     </DndContext>

@@ -1,10 +1,11 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import type { Page } from '../types/page'
-import { getPageTransform } from '../utils/get-page-transform'
+import { AddPage } from './add-page'
 import { AddPageSpace } from './add-page-space'
 import { DragContext } from './drag-context'
+import { MovingButton } from './moving-button'
 import { PageTab } from './page-tab'
 
 interface PageNavigationProps {
@@ -26,20 +27,11 @@ export default function PageNavigation({
   handleAddPage,
   onPageReorder,
 }: PageNavigationProps) {
-  const [hoveredSpaceIndex, setHoveredSpaceIndex] = useState<number | null>(
-    null,
-  )
-
   return (
     <DragContext pages={pages} handleReorderPages={onPageReorder}>
       {pages.map((page, index) => (
         <Fragment key={page.id}>
-          <div
-            style={{
-              transform: getPageTransform(index, hoveredSpaceIndex),
-              transition: 'transform 300ms ease-out',
-            }}
-          >
+          <MovingButton>
             <PageTab
               page={page}
               onSelect={handleSelectPage}
@@ -47,18 +39,16 @@ export default function PageNavigation({
               onDelete={handleDeletePage}
               onDuplicate={handleDuplicatePage}
             />
-          </div>
+          </MovingButton>
           {index < pages.length - 1 && (
-            <div
-              onMouseEnter={() => setHoveredSpaceIndex(index)}
-              onMouseLeave={() => setHoveredSpaceIndex(null)}
-              className="relative"
-            >
-              <AddPageSpace afterPageId={page.id} onAddPage={handleAddPage} />
-            </div>
+            <AddPageSpace afterPageId={page.id} onAddPage={handleAddPage} />
           )}
         </Fragment>
       ))}
+      <div className="w-4" />
+      <MovingButton>
+        <AddPage handleAddPage={handleAddPage} />
+      </MovingButton>
     </DragContext>
   )
 }
