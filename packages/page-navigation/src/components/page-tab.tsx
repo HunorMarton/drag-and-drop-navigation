@@ -3,9 +3,11 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import {
+  Button,
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuSeparator,
   ContextMenuTrigger,
   cn,
 } from '@workspace/ui'
@@ -63,20 +65,12 @@ export function PageTab({
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <button
+        <Button
           ref={setNodeRef}
+          size="sm"
           style={style}
-          className={cn(
-            'flex items-center justify-between w-full gap-2 h-8 px-2.5 rounded-lg text-sm font-medium',
-            'transition-all duration-200 select-none touch-none',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
-            page.isActive
-              ? 'bg-white text-gray-800 shadow-sm border border-gray-200'
-              : 'bg-gray-100 text-gray-500 hover:bg-gray-200',
-            {
-              'shadow-lg z-50': isDragging,
-            },
-          )}
+          variant={page.isActive ? 'navigation-active' : 'navigation-default'}
+          className={cn('select-none', { 'z-50': isDragging })}
           onClick={handleClick}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -90,25 +84,39 @@ export function PageTab({
             {iconWithState}
             <span>{page.name}</span>
           </div>
-          {page.isActive && <MoreVertical className="w-4 h-4 text-gray-400" />}
-        </button>
+          {page.isActive && <MoreVertical className="h-4 w-4 text-gray-400" />}
+        </Button>
       </ContextMenuTrigger>
-      <ContextMenuContent>
-        <ContextMenuItem onClick={() => onRename(page.id, page.name)}>
-          <Edit2 className="w-4 h-4 mr-2" />
-          Rename
-        </ContextMenuItem>
-        <ContextMenuItem onClick={() => onDuplicate(page.id)}>
-          <Copy className="w-4 h-4 mr-2" />
-          Duplicate
-        </ContextMenuItem>
-        <ContextMenuItem
-          onClick={() => onDelete(page.id)}
-          className="text-red-600 focus:text-red-600"
-        >
-          <Trash2 className="w-4 h-4 mr-2" />
-          Delete
-        </ContextMenuItem>
+      <ContextMenuContent className="text-text-primary shadow-active min-w-60 p-0 font-medium">
+        <div className="border-lightgray bg-event-lighter-gray border-[0.5px] p-3 text-sm">
+          Settings
+        </div>
+        <div className="p-1.75">
+          <ContextMenuItem onClick={() => {}}>
+            <Edit2 className="mr-2 h-4 w-4" />
+            Set as first page
+          </ContextMenuItem>
+          <ContextMenuItem onClick={() => onRename(page.id, page.name)}>
+            <Edit2 className="mr-2 h-4 w-4" />
+            Rename
+          </ContextMenuItem>
+          <ContextMenuItem onClick={() => {}}>
+            <Edit2 className="mr-2 h-4 w-4" />
+            Copy
+          </ContextMenuItem>
+          <ContextMenuItem onClick={() => onDuplicate(page.id)}>
+            <Copy className="mr-2 h-4 w-4" />
+            Duplicate
+          </ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem
+            onClick={() => onDelete(page.id)}
+            className="text-red-600 focus:text-red-600"
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            Delete
+          </ContextMenuItem>
+        </div>
       </ContextMenuContent>
     </ContextMenu>
   )

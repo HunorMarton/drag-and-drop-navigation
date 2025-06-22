@@ -8,7 +8,7 @@ export function DragOverlay() {
   return (
     <DndDragOverlay>
       {active && (
-        <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-white shadow-lg border border-gray-200">
+        <div className="flex h-8 items-center gap-2 rounded-lg border-[0.5px] border-gray-200 bg-white px-2.5 text-sm font-medium shadow-lg">
           {active.data.current?.icon}
           <span>{active.data.current?.name}</span>
         </div>

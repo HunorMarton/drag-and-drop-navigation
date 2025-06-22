@@ -10,32 +10,24 @@ interface AddPageSpaceProps {
 
 export function AddPageSpace({ afterPageId, onAddPage }: AddPageSpaceProps) {
   return (
-    <div className="add-page-space relative flex items-center justify-center group">
+    <div className="add-page-space group relative flex items-center justify-center">
       {/* Large invisible hover area for better UX */}
-      <div className="absolute w-12 h-10 -mx-6 z-10" />
+      <div className="absolute -mx-6 h-10 w-12" />
 
-      {/* Spacer that expands when hovered */}
-      <div className="flex items-center justify-center w-4">
-        {/* Add button with smooth appearance */}
-        <div
+      <div className="flex w-4 items-center justify-center">
+        <Button
+          variant="navigation-add"
+          size="tiny"
           className={cn(
-            'flex items-center justify-center',
             'transition-all duration-300 ease-out',
-            'opacity-0 scale-75 pointer-events-none',
-            'group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto',
-            'group-focus:opacity-100 group-focus:scale-100 group-focus:pointer-events-auto',
-            'group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:pointer-events-auto',
+            'scale-75 opacity-0',
+            'group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100',
+            'group-focus-within:pointer-events-auto group-focus-within:scale-100 group-focus-within:opacity-100',
           )}
+          onClick={() => onAddPage(afterPageId)}
         >
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-4 w-4 p-0 rounded-full bg-gray-100 hover:bg-gray-200 border border-gray-300 shadow-sm"
-            onClick={() => onAddPage(afterPageId)}
-          >
-            <Plus className="w-2 h-2" />
-          </Button>
-        </div>
+          <Plus className="h-2 w-2" />
+        </Button>
       </div>
     </div>
   )

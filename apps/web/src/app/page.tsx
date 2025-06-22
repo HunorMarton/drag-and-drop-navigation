@@ -26,15 +26,15 @@ export default function Home() {
         onPageDuplicate={duplicatePage}
       />
       <div className="p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        <h1 className="mb-4 text-2xl font-bold text-gray-900">
           Page Navigation Demo
         </h1>
-        <p className="text-gray-600 mb-4">
+        <p className="mb-4 text-gray-600">
           Check the console to see action logs! The component is now fully
           controlled.
         </p>
-        <div className="bg-white p-4 rounded-lg border">
-          <h2 className="font-semibold mb-2">Current Pages:</h2>
+        <div className="rounded-lg border bg-white p-4">
+          <h2 className="mb-2 font-semibold">Current Pages:</h2>
           <pre className="text-sm text-gray-600">
             {JSON.stringify(
               pages.map((p) => ({

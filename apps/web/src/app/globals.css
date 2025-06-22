@@ -1,6 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
 
 @layer base {
   :root {
@@ -20,7 +42,9 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 218 76% 54%;
+    --shadow-active:
+      0 1px 1px 0 rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
     --radius: 0.5rem;
   }
   .dark {
@@ -43,7 +67,7 @@
     --ring: 212.7 26.8% 83.9%;
   }
   body {
-    @apply font-sans font-medium text-sm leading-tight tracking-tighter;
+    @apply font-sans text-sm leading-tight font-medium tracking-tighter;
   }
 }
 
@@ -56,8 +80,11 @@
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@theme {
+  --shadow-active: var(--shadow-active);
+  --color-lightgray: #e1e1e1;
+  --color-event-lighter-gray: #fafbfc;
+  --color-background: #9da4b2;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #677289;
 }

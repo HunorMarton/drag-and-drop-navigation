@@ -2,9 +2,9 @@ import type { Page } from '@workspace/page-navigation'
 import { CheckCircle, FileText, Info } from 'lucide-react'
 
 export const iconMap = {
-  info: <Info className="w-4 h-4" />,
-  document: <FileText className="w-4 h-4" />,
-  check: <CheckCircle className="w-4 h-4" />,
+  info: <Info className="h-4 w-4" />,
+  document: <FileText className="h-4 w-4" />,
+  check: <CheckCircle className="h-4 w-4" />,
 }
 
 export const initialPages: Page[] = [
