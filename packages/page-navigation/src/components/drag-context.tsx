@@ -13,16 +13,19 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable'
+import { cn } from '@workspace/ui'
 import type { ReactNode } from 'react'
 import type { Page } from '../types/page'
 import { DragOverlay } from './drag-overlay'
 
 export function DragContext({
   children,
+  className,
   pages,
   handleReorderPages,
 }: {
   children: ReactNode
+  className: string
   pages: Page[]
   handleReorderPages: (activeId: string, overId: string) => void
 }) {
@@ -63,7 +66,9 @@ export function DragContext({
         items={pages.map((p) => p.id)}
         strategy={horizontalListSortingStrategy}
       >
-        <div className="flex flex-row items-center">{children}</div>
+        <div className={cn('inline-flex flex-row items-center', className)}>
+          {children}
+        </div>
       </SortableContext>
       <DragOverlay />
     </DndContext>

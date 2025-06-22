@@ -26,6 +26,8 @@ const buttonVariants = cva(
         ),
         'navigation-default': cn(
           'bg-gray-400/15 text-gray-500 hover:bg-gray-400/35',
+          // This pseudo element here is used to hide the dashed line that otherwise would be visible through the transparent background. The pseudo element matches the background color of the page navigation.
+          'relative before:bg-gray-100 before:absolute before:left-0 before:w-full before:h-full before:-z-10 before:rounded-md before:shadow-active',
         ),
         'navigation-add': cn('bg-white border-gray-200 shadow-active'),
       },

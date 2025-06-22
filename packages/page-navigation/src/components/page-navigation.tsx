@@ -28,7 +28,11 @@ export default function PageNavigation({
   onPageReorder,
 }: PageNavigationProps) {
   return (
-    <DragContext pages={pages} handleReorderPages={onPageReorder}>
+    <DragContext
+      pages={pages}
+      handleReorderPages={onPageReorder}
+      className="relative before:absolute before:left-0 before:w-full before:border-t before:border-dashed before:border-gray-300 [&>div]:z-10"
+    >
       {pages.map((page, index) => (
         <Fragment key={page.id}>
           <MovingButton>
