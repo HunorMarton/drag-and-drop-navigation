@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import type { Page } from '../types/page'
 import { AddPage } from './add-page'
 import { AddPageSpace } from './add-page-space'
+import { DragBoundary } from './drag-boundary'
 import { DragContext } from './drag-context'
 import { MovingButton } from './moving-button'
 import { PageTab } from './page-tab'
@@ -49,7 +50,7 @@ export default function PageNavigation({
           )}
         </Fragment>
       ))}
-      <div className="w-4" />
+      <DragBoundary />
       <MovingButton>
         <AddPage handleAddPage={handleAddPage} />
       </MovingButton>

@@ -15,6 +15,7 @@ import {
 } from '@dnd-kit/sortable'
 import { cn } from '@workspace/ui'
 import type { ReactNode } from 'react'
+import { useRef } from 'react'
 import type { Page } from '../types/page'
 import { DragOverlay } from './drag-overlay'
 
@@ -29,6 +30,8 @@ export function DragContext({
   pages: Page[]
   handleReorderPages: (activeId: string, overId: string) => void
 }) {
+  const dragContainerRef = useRef<HTMLElement>(null)
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -66,11 +69,14 @@ export function DragContext({
         items={pages.map((p) => p.id)}
         strategy={horizontalListSortingStrategy}
       >
-        <div className={cn('inline-flex flex-row items-center', className)}>
+        <nav
+          ref={dragContainerRef}
+          className={cn('inline-flex flex-row items-center', className)}
+        >
           {children}
-        </div>
+        </nav>
       </SortableContext>
-      <DragOverlay />
+      <DragOverlay dragContainerRef={dragContainerRef} />
     </DndContext>
   )
 }
