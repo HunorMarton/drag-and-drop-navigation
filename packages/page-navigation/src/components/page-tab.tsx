@@ -10,7 +10,6 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
-  cn,
 } from '@workspace/ui'
 import { MoreVertical } from 'lucide-react'
 import { type KeyboardEvent, type MouseEvent } from 'react'
@@ -43,7 +42,7 @@ export function PageTab({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0 : 1,
   }
 
   const handleClick = (e: MouseEvent | KeyboardEvent) => {
@@ -61,9 +60,8 @@ export function PageTab({
           size="sm"
           style={style}
           variant={page.isActive ? 'navigation-active' : 'navigation-default'}
-          className={cn('select-none', { 'z-50': isDragging })}
           onClick={handleClick}
-          onKeyDown={(e) => {
+          onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
             if (e.key === 'Enter' || e.key === ' ') {
               handleClick(e)
             }
