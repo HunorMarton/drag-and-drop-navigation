@@ -7,13 +7,13 @@ import { type RefObject } from 'react'
 import { useDragModifier } from '../hooks/use-drag-modifier'
 
 export function DragOverlay({
-  dragContainerRef,
+  containerRef,
 }: {
-  dragContainerRef: RefObject<HTMLElement | null>
+  containerRef: RefObject<HTMLElement | null>
 }) {
   const { active } = useDndContext()
 
-  const restrictMovement = useDragModifier({ dragContainerRef })
+  const restrictMovement = useDragModifier({ containerRef })
 
   return (
     <DndDragOverlay modifiers={[restrictMovement]}>

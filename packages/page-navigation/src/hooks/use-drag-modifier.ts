@@ -3,27 +3,26 @@ import { useEffect, useRef, type RefObject } from 'react'
 import { DRAG_BOUNDARY_CLASS_NAME } from '../utils/constants'
 
 export function useDragModifier({
-  dragContainerRef,
+  containerRef,
 }: {
-  dragContainerRef: RefObject<HTMLElement | null>
+  containerRef: RefObject<HTMLElement | null>
 }) {
   const minTransformXRef = useRef<number>(0)
   const maxTransformXRef = useRef<number>(0)
 
   useEffect(() => {
-    if (!dragContainerRef.current) return
+    if (!containerRef.current) return
 
     // Can't move left of the nav element
-    minTransformXRef.current =
-      dragContainerRef.current.getBoundingClientRect().left
+    minTransformXRef.current = containerRef.current.getBoundingClientRect().left
 
     // Can't move right of the drag boundary
-    const dragBoundaryElement = dragContainerRef.current.querySelector(
+    const dragBoundaryElement = containerRef.current.querySelector(
       `.${DRAG_BOUNDARY_CLASS_NAME}`,
     )
     if (!dragBoundaryElement) throw new Error('Drag boundary element not found')
     maxTransformXRef.current = dragBoundaryElement?.getBoundingClientRect().left
-  }, [dragContainerRef])
+  }, [containerRef])
 
   const restrictMovement: Modifier = (args) => {
     const { transform, draggingNodeRect } = args
