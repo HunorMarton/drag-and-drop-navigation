@@ -15,16 +15,7 @@ export default function Home() {
   } = usePageStore()
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PageNavigation
-        pages={pages}
-        onPageSelect={selectPage}
-        onPageAdd={addPage}
-        onPageReorder={reorderPages}
-        onPageRename={renamePage}
-        onPageDelete={deletePage}
-        onPageDuplicate={duplicatePage}
-      />
+    <div className="flex min-h-screen flex-col justify-between bg-gray-50">
       <div className="p-8">
         <h1 className="mb-4 text-2xl font-bold text-gray-900">
           Page Navigation Demo
@@ -48,6 +39,15 @@ export default function Home() {
           </pre>
         </div>
       </div>
+      <PageNavigation
+        pages={pages}
+        onPageSelect={selectPage}
+        onPageAdd={addPage}
+        onPageReorder={reorderPages}
+        onPageRename={renamePage}
+        onPageDelete={deletePage}
+        onPageDuplicate={duplicatePage}
+      />
     </div>
   )
 }
