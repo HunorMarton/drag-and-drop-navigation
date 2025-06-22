@@ -82,10 +82,26 @@
 
 @theme {
   --shadow-active: var(--shadow-active);
-  --color-lightgray: #e1e1e1;
-  --color-event-lighter-gray: #fafbfc;
-  --color-navigation-bar: #f9fafb;
-  --color-background: #9da4b2;
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #677289;
+
+  --color-gray-50: hsl(210, 25%, 98%); /* #FAFBFC */
+  --color-gray-100: hsl(210, 20%, 98%); /* #F9FAFB */
+  --color-gray-200: hsl(0, 0%, 88%); /* #E1E1E1 */
+  --color-gray-300: hsl(0, 0%, 75%); /* #C0C0C0 */
+  --color-gray-400: hsl(220, 12%, 66%); /* #9DA4B2 */
+  --color-gray-500: hsl(220, 10%, 59%); /* #8C93A1 */
+  --color-gray-600: hsl(221, 14%, 47%); /* #677289 */
+
+  --color-gray-800: hsl(0, 0%, 27%); /* #444444 */
+  --color-gray-900: hsl(0, 0%, 10%); /* #1A1A1A */
+
+  --color-active: #f59d0e;
+  --color-flag: #2f72e2;
+  --color-destructive: #ef494f;
 }
+
+/* These colors are used by icons within SVGs with the `currentColor` attribute. Without inlining them, the color utilities would not be added to the bundle. */
+@source inline('text-active');
+@source inline('text-flag');
+@source inline('text-gray-400');
+@source inline('text-gray-500');
+@source inline('text-gray-900');

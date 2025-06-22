@@ -1,7 +1,7 @@
 'use client'
 
+import { Icon } from '@workspace/icons'
 import { Button, cn } from '@workspace/ui'
-import { Plus } from 'lucide-react'
 
 interface AddPageSpaceProps {
   afterPageId: string
@@ -26,7 +26,7 @@ export function AddPageSpace({ afterPageId, onAddPage }: AddPageSpaceProps) {
           )}
           onClick={() => onAddPage(afterPageId)}
         >
-          <Plus className="h-2 w-2" />
+          <Icon icon="addPageSpace" variant="black" size="sm" />
         </Button>
       </div>
     </div>

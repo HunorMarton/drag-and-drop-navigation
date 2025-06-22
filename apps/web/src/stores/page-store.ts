@@ -2,7 +2,6 @@
 
 import type { Page } from '@workspace/page-navigation'
 import { create } from 'zustand'
-import { iconMap } from '../utils/page-constants'
 
 interface PageState {
   pages: Page[]
@@ -15,11 +14,11 @@ interface PageState {
   duplicatePage: (pageId: string) => void
 }
 
-const initialPages: Page[] = [
-  { id: '1', name: 'Info', icon: iconMap.info, isActive: true },
-  { id: '2', name: 'Details', icon: iconMap.document },
-  { id: '3', name: 'Other', icon: iconMap.document },
-  { id: '4', name: 'Ending', icon: iconMap.check },
+export const initialPages: Page[] = [
+  { id: '1', name: 'Info', icon: 'info', isActive: true },
+  { id: '2', name: 'Details', icon: 'document' },
+  { id: '3', name: 'Other', icon: 'document' },
+  { id: '4', name: 'Ending', icon: 'check' },
 ]
 
 export const usePageStore = create<PageState>()((set) => ({
@@ -40,7 +39,7 @@ export const usePageStore = create<PageState>()((set) => ({
       const newPage: Page = {
         id: `${Date.now()}`,
         name: 'New Page',
-        icon: iconMap.document,
+        icon: 'document',
         isActive: false,
       }
 

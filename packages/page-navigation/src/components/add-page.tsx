@@ -1,5 +1,5 @@
+import { Icon } from '@workspace/icons'
 import { Button } from '@workspace/ui'
-import { Plus } from 'lucide-react'
 
 export const AddPage = ({ handleAddPage }: { handleAddPage: () => void }) => {
   return (
@@ -8,7 +8,7 @@ export const AddPage = ({ handleAddPage }: { handleAddPage: () => void }) => {
       size="sm"
       onClick={() => handleAddPage()}
     >
-      <Plus className="h-4 w-4" />
+      <Icon icon="addPage" variant="dark" />
       Add page
     </Button>
   )

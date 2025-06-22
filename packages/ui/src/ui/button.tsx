@@ -6,7 +6,7 @@ import { cn } from '../utils'
 
 const buttonVariants = cva(
   cn(
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-gray-400 transition-colors disabled:pointer-events-none disabled:opacity-50',
     'cursor-pointer outline-hidden border-[0.5px] border-transparent',
     'focus:border-ring focus:ring-[1.5px] focus:ring-ring/25 focus:ring-offset-0 focus:shadow-active',
   ),
@@ -17,18 +17,17 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          'border border-input bg-gray-400 hover:bg-accent hover:text-accent-foreground',
+        secondary: 'bg-gray-500 text-secondary-foreground hover:bg-gray-500/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         'navigation-active': cn(
-          'bg-white text-text-primary border-lightgray shadow-active',
+          'bg-white text-gray-900 border-gray-200 shadow-active',
         ),
         'navigation-default': cn(
-          'bg-background/15 text-text-secondary hover:bg-background/35',
+          'bg-gray-400/15 text-gray-500 hover:bg-gray-400/35',
         ),
-        'navigation-add': cn('bg-white border-lightgray shadow-active'),
+        'navigation-add': cn('bg-white border-gray-200 shadow-active'),
       },
       size: {
         default: 'h-10 px-4 py-2',

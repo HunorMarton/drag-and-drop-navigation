@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { IconName } from '@workspace/icons'
 
 export type Page = {
   id: string
   name: string
-  icon: ReactNode
+  icon: IconName
   isActive?: boolean
 }
 

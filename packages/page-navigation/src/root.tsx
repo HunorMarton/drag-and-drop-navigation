@@ -39,7 +39,7 @@ export default function Root({
   } = usePageNavigationInternal(callbacks)
 
   return (
-    <div className="bg-navigation-bar w-full border-t border-gray-200 p-5">
+    <div className="w-full border-t border-gray-200 bg-gray-100 p-5">
       <PageNavigation
         pages={pages}
         handleSelectPage={handleSelectPage}

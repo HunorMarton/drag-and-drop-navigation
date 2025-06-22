@@ -12,9 +12,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@workspace/config-typescript": "workspace:*",
+    "@workspace/icons": "workspace:*",
     "@workspace/page-navigation": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "lucide-react": "^0.454.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
