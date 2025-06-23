@@ -1,27 +1,5 @@
-import { cva, VariantProps } from 'class-variance-authority'
-import { icons } from './icons'
-
-const iconVariants = cva('', {
-  variants: {
-    variant: {
-      black: 'text-black',
-      dark: 'text-gray-900',
-      default: 'text-gray-500',
-      gray: 'text-gray-400',
-      active: 'text-active',
-      flag: 'text-flag',
-      destructive: 'text-destructive',
-    },
-    size: {
-      default: 'h-4 w-4',
-      sm: 'h-2 w-2',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default',
-  },
-})
+import { VariantProps } from 'class-variance-authority'
+import { iconVariants, icons } from './icons'
 
 export const Icon = ({
   icon,

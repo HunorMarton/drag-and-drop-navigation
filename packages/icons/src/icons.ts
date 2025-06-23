@@ -1,3 +1,4 @@
+import { cva, VariantProps } from 'class-variance-authority'
 import { AddPage } from './icons/add-page'
 import { AddPageSpace } from './icons/add-page-space'
 import { Check } from './icons/check'
@@ -22,4 +23,27 @@ export const icons = {
   duplicate: Duplicate,
 }
 
+export const iconVariants = cva('', {
+  variants: {
+    variant: {
+      black: 'text-black',
+      dark: 'text-gray-900',
+      default: 'text-gray-500',
+      gray: 'text-gray-400',
+      active: 'text-active',
+      flag: 'text-flag',
+      destructive: 'text-destructive',
+    },
+    size: {
+      default: 'h-4 w-4',
+      sm: 'h-2 w-2',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'default',
+  },
+})
+
 export type IconName = keyof typeof icons
+export type IconVariant = VariantProps<typeof iconVariants>['variant']

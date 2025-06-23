@@ -88,6 +88,8 @@
   --color-gray-200: hsl(0, 0%, 88%); /* #E1E1E1 */
   --color-gray-300: hsl(0, 0%, 75%); /* #C0C0C0 */
   --color-gray-400: hsl(220, 12%, 66%); /* #9DA4B2 */
+  --color-gray-415: #ebedf0; /* 15% opacity on #F9FAFB */
+  --color-gray-435: #d9dce1; /* 35% opacity on #F9FAFB */
   --color-gray-500: hsl(220, 10%, 59%); /* #8C93A1 */
   --color-gray-600: hsl(221, 14%, 47%); /* #677289 */
 

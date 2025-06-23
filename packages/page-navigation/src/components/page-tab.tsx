@@ -5,15 +5,16 @@ import { CSS } from '@dnd-kit/utilities'
 import { Icon } from '@workspace/icons'
 import {
   Button,
+  cn,
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '@workspace/ui'
-import { MoreVertical } from 'lucide-react'
 import { type KeyboardEvent, type MouseEvent } from 'react'
 import type { Page } from '../types/page'
+import { PageButtonContent } from './page-button-content'
 
 interface PageTabProps {
   page: Page
@@ -36,19 +37,29 @@ export function PageTab({
     setNodeRef,
     transform,
     transition,
-    isDragging,
-  } = useSortable({ id: page.id, data: { icon: page.icon, name: page.name } })
+    isDragging: pageDragged,
+  } = useSortable({
+    id: page.id,
+    data: { icon: page.icon, name: page.name, active: page.isActive },
+  })
+
+  const dragInProgress = transform !== null
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0 : 1,
   }
 
   const handleClick = (e: MouseEvent | KeyboardEvent) => {
     e.preventDefault()
-    if (!isDragging) {
+    if (!pageDragged) {
       onSelect(page.id)
+    }
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleClick(e)
     }
   }
 
@@ -59,24 +70,29 @@ export function PageTab({
           ref={setNodeRef}
           size="sm"
           style={style}
-          variant={page.isActive ? 'navigation-active' : 'navigation-default'}
+          variant={
+            dragInProgress
+              ? 'navigation-muted'
+              : page.isActive
+                ? 'navigation-active'
+                : 'navigation-default'
+          }
+          className={cn(
+            pageDragged && 'opacity-0', // Hide the element that's being dragged
+          )}
           onClick={handleClick}
-          onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              handleClick(e)
-            }
-          }}
+          onKeyDown={handleKeyDown}
           {...attributes}
           {...listeners}
         >
-          <div className="flex items-center gap-1.5">
-            <Icon
-              icon={page.icon}
-              variant={page.isActive ? 'active' : 'default'}
-            />
-            <span>{page.name}</span>
-          </div>
-          {page.isActive && <MoreVertical className="h-4 w-4 text-gray-400" />}
+          <PageButtonContent
+            icon={page.icon}
+            iconVariant={
+              page.isActive && !dragInProgress ? 'active' : 'default'
+            }
+            label={page.name}
+            isActive={page.isActive}
+          />
         </Button>
       </ContextMenuTrigger>
       <ContextMenuContent className="shadow-active min-w-60 p-0 font-medium text-gray-900">

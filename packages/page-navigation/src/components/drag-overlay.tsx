@@ -1,10 +1,10 @@
 'use client'
 
 import { DragOverlay as DndDragOverlay, useDndContext } from '@dnd-kit/core'
-import { Icon } from '@workspace/icons'
 import { Button } from '@workspace/ui'
 import { type RefObject } from 'react'
 import { useDragModifier } from '../hooks/use-drag-modifier'
+import { PageButtonContent } from './page-button-content'
 
 export function DragOverlay({
   containerRef,
@@ -19,8 +19,12 @@ export function DragOverlay({
     <DndDragOverlay modifiers={[restrictMovement]}>
       {active && (
         <Button variant="navigation-active" size="sm">
-          <Icon icon={active.data.current?.icon} variant="default" />
-          <span>{active.data.current?.name}</span>
+          <PageButtonContent
+            icon={active.data.current?.icon}
+            iconVariant={active.data.current?.active ? 'active' : 'default'}
+            label={active.data.current?.name}
+            isActive={active.data.current?.active}
+          />
         </Button>
       )}
     </DndDragOverlay>

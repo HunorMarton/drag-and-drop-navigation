@@ -6,7 +6,7 @@ import { cn } from '../utils'
 
 const buttonVariants = cva(
   cn(
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-gray-400 transition-colors disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-gray-400 transition-colors disabled:pointer-events-none disabled:opacity-50',
     'cursor-pointer select-none outline-hidden border-[0.5px] border-transparent',
     'focus:border-ring focus:ring-[1.5px] focus:ring-ring/25 focus:ring-offset-0 focus:shadow-active',
   ),
@@ -21,15 +21,11 @@ const buttonVariants = cva(
         secondary: 'bg-gray-500 text-secondary-foreground hover:bg-gray-500/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        'navigation-active': cn(
+        'navigation-active':
           'bg-white text-gray-900 border-gray-200 shadow-active',
-        ),
-        'navigation-default': cn(
-          'bg-gray-400/15 text-gray-500 hover:bg-gray-400/35',
-          // This pseudo element here is used to hide the dashed line that otherwise would be visible through the transparent background. The pseudo element matches the background color of the page navigation.
-          'relative before:bg-gray-100 before:absolute before:left-0 before:w-full before:h-full before:-z-10 before:rounded-md before:shadow-active',
-        ),
-        'navigation-add': cn('bg-white border-gray-200 shadow-active'),
+        'navigation-default': 'bg-gray-415 text-gray-500 hover:bg-gray-435',
+        'navigation-muted': 'border-gray-200 text-gray-500 bg-gray-100',
+        'navigation-add': 'bg-white border-gray-200 shadow-active',
       },
       size: {
         default: 'h-10 px-4 py-2',
