@@ -1,5 +1,5 @@
 // Utils
-export { cn } from './utils'
+export { cn } from './lib/utils'
 
 // UI Components
 export { Button, buttonVariants } from './ui/button'

@@ -2,19 +2,11 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Icon } from '@workspace/icons'
-import {
-  Button,
-  cn,
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from '@workspace/ui'
+import { Button, cn } from '@workspace/ui'
 import { type KeyboardEvent, type MouseEvent } from 'react'
 import type { Page } from '../types/page'
 import { PageButtonContent } from './page-button-content'
+import { PageContextMenu } from './page-context-menu'
 
 interface PageTabProps {
   page: Page
@@ -64,68 +56,38 @@ export function PageTab({
   }
 
   return (
-    <ContextMenu>
-      <ContextMenuTrigger asChild>
-        <Button
-          ref={setNodeRef}
-          size="sm"
-          style={style}
-          variant={
-            dragInProgress
-              ? 'navigation-muted'
-              : page.isActive
-                ? 'navigation-active'
-                : 'navigation-default'
-          }
-          className={cn(
-            pageDragged && 'opacity-0', // Hide the element that's being dragged
-          )}
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          {...attributes}
-          {...listeners}
-        >
-          <PageButtonContent
-            icon={page.icon}
-            iconVariant={
-              page.isActive && !dragInProgress ? 'active' : 'default'
-            }
-            label={page.name}
-            isActive={page.isActive}
-          />
-        </Button>
-      </ContextMenuTrigger>
-      <ContextMenuContent className="shadow-active min-w-60 p-0 font-medium text-gray-900">
-        <div className="border-[0.5px] border-gray-200 bg-gray-50 p-3 text-sm">
-          Settings
-        </div>
-        <div className="p-1.75">
-          <ContextMenuItem onClick={() => {}}>
-            <Icon icon="flag" variant="flag" />
-            Set as first page
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => onRename(page.id, page.name)}>
-            <Icon icon="rename" variant="gray" />
-            Rename
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => {}}>
-            <Icon icon="copy" variant="gray" />
-            Copy
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => onDuplicate(page.id)}>
-            <Icon icon="duplicate" variant="gray" />
-            Duplicate
-          </ContextMenuItem>
-          <ContextMenuSeparator />
-          <ContextMenuItem
-            onClick={() => onDelete(page.id)}
-            className="text-destructive"
-          >
-            <Icon icon="trash" variant="destructive" />
-            Delete
-          </ContextMenuItem>
-        </div>
-      </ContextMenuContent>
-    </ContextMenu>
+    <PageContextMenu
+      page={page}
+      onRename={onRename}
+      onDelete={onDelete}
+      onDuplicate={onDuplicate}
+    >
+      <Button
+        ref={setNodeRef}
+        size="sm"
+        style={style}
+        variant={
+          dragInProgress
+            ? 'navigation-muted'
+            : page.isActive
+              ? 'navigation-active'
+              : 'navigation-default'
+        }
+        className={cn(
+          pageDragged && 'opacity-0', // Hide the element that's being dragged
+        )}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        {...attributes}
+        {...listeners}
+      >
+        <PageButtonContent
+          icon={page.icon}
+          iconVariant={page.isActive && !dragInProgress ? 'active' : 'default'}
+          label={page.name}
+          isActive={page.isActive}
+        />
+      </Button>
+    </PageContextMenu>
   )
 }
