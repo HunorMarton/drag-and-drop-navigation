@@ -54,7 +54,7 @@ export function DragContext({
       >
         {children}
       </SortableContext>
-      <DragOverlay containerRef={containerRef} />
+      <DragOverlay containerRef={containerRef} pages={pages} />
     </DndContext>
   )
 }

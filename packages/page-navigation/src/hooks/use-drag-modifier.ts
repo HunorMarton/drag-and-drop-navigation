@@ -1,11 +1,14 @@
 import { Modifier } from '@dnd-kit/core'
 import { useEffect, useRef, type RefObject } from 'react'
+import type { Page } from '../types/page'
 import { DRAG_BOUNDARY_CLASS_NAME } from '../utils/constants'
 
 export function useDragModifier({
   containerRef,
+  pages,
 }: {
   containerRef: RefObject<HTMLElement | null>
+  pages: Page[]
 }) {
   const minTransformXRef = useRef<number>(0)
   const maxTransformXRef = useRef<number>(0)
@@ -22,7 +25,7 @@ export function useDragModifier({
     )
     if (!dragBoundaryElement) throw new Error('Drag boundary element not found')
     maxTransformXRef.current = dragBoundaryElement?.getBoundingClientRect().left
-  }, [containerRef])
+  }, [containerRef, pages]) // Update numbers if the container or the content changes
 
   const restrictMovement: Modifier = (args) => {
     const { transform, draggingNodeRect } = args
