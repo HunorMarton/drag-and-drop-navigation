@@ -43,7 +43,7 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 218 76% 54%;
-    --shadow-active:
+    --shadow-md:
       0 1px 1px 0 rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
     --radius: 0.5rem;
   }
@@ -67,7 +67,7 @@
     --ring: 212.7 26.8% 83.9%;
   }
   body {
-    @apply font-sans text-sm leading-tight font-medium tracking-tighter;
+    @apply font-sans text-base leading-tight font-medium tracking-tighter;
   }
 }
 
@@ -81,15 +81,20 @@
 }
 
 @theme {
-  --shadow-active: var(--shadow-active);
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --shadow-md: var(--shadow-md);
+
+  --tracking-tighter: -0.015em; /* -1.5% */
+  --leading-tighter: calc(1 / 0.875);
 
   --color-gray-50: hsl(210, 25%, 98%); /* #FAFBFC */
   --color-gray-100: hsl(210, 20%, 98%); /* #F9FAFB */
   --color-gray-200: hsl(0, 0%, 88%); /* #E1E1E1 */
   --color-gray-300: hsl(0, 0%, 75%); /* #C0C0C0 */
   --color-gray-400: hsl(220, 12%, 66%); /* #9DA4B2 */
-  --color-gray-415: #ebedf0; /* 15% opacity on #F9FAFB */
-  --color-gray-435: #d9dce1; /* 35% opacity on #F9FAFB */
+  --color-gray-415: #ebedf0; /* #9DA4B2 15% opacity on #F9FAFB */
+  --color-gray-435: #d9dce1; /* #9DA4B2 35% opacity on #F9FAFB */
   --color-gray-500: hsl(220, 10%, 59%); /* #8C93A1 */
   --color-gray-600: hsl(221, 14%, 47%); /* #677289 */
 
