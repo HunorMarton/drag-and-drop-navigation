@@ -15,8 +15,8 @@ export default function Home() {
   } = usePageStore()
 
   return (
-    <div className="flex min-h-screen flex-col justify-between bg-gray-50">
-      <div className="p-8">
+    <div className="flex max-h-screen min-h-screen flex-col justify-between bg-gray-50">
+      <div className="overflow-y-auto p-8">
         <h1 className="mb-4 text-2xl font-bold text-gray-900">Hi Dominic!</h1>
         <p className="mb-4 text-sm text-gray-600">
           At the bottom of the page, you can see the component in action.
