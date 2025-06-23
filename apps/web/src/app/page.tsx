@@ -17,12 +17,21 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col justify-between bg-gray-50">
       <div className="p-8">
-        <h1 className="mb-4 text-2xl font-bold text-gray-900">
-          Page Navigation Demo
-        </h1>
-        <p className="mb-4 text-gray-600">
-          Check the console to see action logs! The component is now fully
-          controlled.
+        <h1 className="mb-4 text-2xl font-bold text-gray-900">Hi Dominic!</h1>
+        <p className="mb-4 text-sm text-gray-600">
+          At the bottom of the page, you can see the component in action.
+        </p>
+        <p className="mb-4 text-sm text-gray-600">
+          Supports page reordering via drag-and-drop and keyboard navigation.
+          You can add new pages between existing ones by hovering over them and
+          clicking the button that appears. These hidden buttons are also
+          accessible with keyboard navigation. The context menu supports
+          renaming, duplicating, and deleting pages.
+        </p>
+        <p className="mb-4 text-sm text-gray-600">
+          As I don&apos;t have a paid Figma account, I do not have access to dev
+          mode. The style might not be perfectly accurate. I also did not focus
+          on accessibility on mobile, and some aria labels might be missing.
         </p>
         <div className="rounded-lg border bg-white p-4">
           <h2 className="mb-2 font-semibold">Current Pages:</h2>
