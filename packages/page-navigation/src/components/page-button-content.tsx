@@ -1,5 +1,4 @@
 import { Icon, type IconName, type IconVariant } from '@workspace/icons'
-import { MoreVertical } from 'lucide-react'
 
 export function PageButtonContent({
   icon,
@@ -18,7 +17,7 @@ export function PageButtonContent({
         <Icon icon={icon} variant={iconVariant} />
         <span>{label}</span>
       </div>
-      {isActive && <MoreVertical className="h-4 w-4 text-gray-400" />}
+      {isActive && <Icon icon="moreVertical" variant="gray" />}
     </>
   )
 }

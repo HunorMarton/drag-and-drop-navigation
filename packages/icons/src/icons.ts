@@ -7,6 +7,7 @@ import { Document } from './icons/document'
 import { Duplicate } from './icons/duplicate'
 import { Flag } from './icons/flag'
 import { Info } from './icons/info'
+import { MoreVertical } from './icons/more-vertical'
 import { Rename } from './icons/rename'
 import { Trash } from './icons/trash'
 
@@ -21,6 +22,7 @@ export const icons = {
   copy: Copy,
   rename: Rename,
   duplicate: Duplicate,
+  moreVertical: MoreVertical,
 }
 
 export const iconVariants = cva('', {
