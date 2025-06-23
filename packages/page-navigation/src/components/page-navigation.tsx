@@ -32,7 +32,7 @@ export default function PageNavigation({
   const containerRef = useRef<HTMLElement>(null)
 
   return (
-    <Nav ref={containerRef}>
+    <Nav ref={containerRef} className="group/nav">
       <DragContext
         pages={pages}
         containerRef={containerRef}
