@@ -56,6 +56,7 @@ function Button({
   return (
     <Comp
       data-slot="button"
+      tabIndex={0}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />

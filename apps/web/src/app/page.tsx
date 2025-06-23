@@ -20,8 +20,7 @@ export default function Home() {
         <h1 className="mb-4 text-2xl font-bold text-gray-900">Hi Dominic!</h1>
         <p className="mb-4 text-sm text-gray-600">
           At the bottom of the page, you can see the component in action.
-          Currently it&apos;s only tested in Chrome (Safari has a quite obvious
-          bug, that I might check before you review it).
+          Currently it&apos;s only tested in Chrome and Safari.
         </p>
         <p className="mb-4 text-sm text-gray-600">
           Supports page reordering via drag-and-drop and keyboard navigation.
