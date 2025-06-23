@@ -4,10 +4,28 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
+type DropdownMenuContextValue = {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+const DropdownMenuContext =
+  React.createContext<DropdownMenuContextValue | null>(null)
+
 function DropdownMenu({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
-  return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
+  const [open, setOpen] = React.useState(false)
+  return (
+    <DropdownMenuContext value={{ open, onOpenChange: setOpen }}>
+      <DropdownMenuPrimitive.Root
+        data-slot="dropdown-menu"
+        open={open}
+        onOpenChange={setOpen}
+        {...props}
+      />
+    </DropdownMenuContext>
+  )
 }
 
 function DropdownMenuPortal({
@@ -19,11 +37,32 @@ function DropdownMenuPortal({
 }
 
 function DropdownMenuTrigger({
+  triggerOnContextMenu = false,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger> & {
+  triggerOnContextMenu?: boolean
+}) {
+  const context = React.useContext(DropdownMenuContext)
+  if (!context) {
+    throw new Error('ContextMenuTrigger must be used within a ContextMenu')
+  }
+  const { onOpenChange } = context
+
+  const handlePointerDown = (event: React.PointerEvent) => {
+    event.preventDefault()
+    if (!triggerOnContextMenu) onOpenChange(true)
+  }
+
+  const handleContextMenu = (event: React.MouseEvent) => {
+    event.preventDefault()
+    if (triggerOnContextMenu) onOpenChange(true)
+  }
+
   return (
     <DropdownMenuPrimitive.Trigger
       data-slot="dropdown-menu-trigger"
+      onPointerDown={handlePointerDown}
+      onContextMenu={handleContextMenu}
       {...props}
     />
   )

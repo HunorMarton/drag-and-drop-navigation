@@ -4,13 +4,6 @@ export { cn } from './lib/utils'
 // UI Components
 export { Button, buttonVariants } from './ui/button'
 export {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from './ui/context-menu'
-export {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -19,5 +12,12 @@ export {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog'
+export {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
 export { Input } from './ui/input'
 export { Label } from './ui/label'

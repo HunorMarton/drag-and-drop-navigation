@@ -1,5 +1,5 @@
 {
-  "extends": "../config-typescript/base.json",
+  "extends": "@workspace/config-typescript/base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",

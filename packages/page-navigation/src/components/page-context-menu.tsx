@@ -2,11 +2,11 @@
 
 import { Icon } from '@workspace/icons'
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@workspace/ui'
 import type { ReactNode } from 'react'
 import type { Page } from '../types/page'
@@ -27,39 +27,45 @@ export function PageContextMenu({
   onDuplicate,
 }: PageContextMenuProps) {
   return (
-    <ContextMenu>
-      <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
-      <ContextMenuContent className="shadow-active min-w-60 p-0 font-medium text-gray-900">
+    <DropdownMenu>
+      <DropdownMenuTrigger triggerOnContextMenu={true} asChild>
+        {children}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        sideOffset={9}
+        align="start"
+        className="shadow-active min-w-60 p-0 font-medium text-gray-900"
+      >
         <div className="border-[0.5px] border-gray-200 bg-gray-50 p-3 text-sm">
           Settings
         </div>
         <div className="p-1.75">
-          <ContextMenuItem onClick={() => {}}>
+          <DropdownMenuItem onClick={() => {}}>
             <Icon icon="flag" variant="flag" />
             Set as first page
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => onRename(page.id, page.name)}>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onRename(page.id, page.name)}>
             <Icon icon="rename" variant="gray" />
             Rename
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => {}}>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => {}}>
             <Icon icon="copy" variant="gray" />
             Copy
-          </ContextMenuItem>
-          <ContextMenuItem onClick={() => onDuplicate(page.id)}>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onDuplicate(page.id)}>
             <Icon icon="duplicate" variant="gray" />
             Duplicate
-          </ContextMenuItem>
-          <ContextMenuSeparator />
-          <ContextMenuItem
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
             onClick={() => onDelete(page.id)}
             className="text-destructive"
           >
             <Icon icon="trash" variant="destructive" />
             Delete
-          </ContextMenuItem>
+          </DropdownMenuItem>
         </div>
-      </ContextMenuContent>
-    </ContextMenu>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
