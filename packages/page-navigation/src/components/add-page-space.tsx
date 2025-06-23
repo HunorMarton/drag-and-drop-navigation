@@ -18,7 +18,7 @@ export function AddPageSpace({ afterPageId, onAddPage }: AddPageSpaceProps) {
         className={cn(
           'transition-all duration-300 ease-out',
           'pointer-events-none scale-75 opacity-0',
-          'group-not-focus-within/nav:group-hover/add:pointer-events-auto group-not-focus-within/nav:group-hover/add:scale-100 group-not-focus-within/nav:group-hover/add:opacity-100',
+          'group-not-has-[.add-page-space:focus-within]/nav:group-hover/add:pointer-events-auto group-not-has-[.add-page-space:focus-within]/nav:group-hover/add:scale-100 group-not-has-[.add-page-space:focus-within]/nav:group-hover/add:opacity-100',
           'group-focus-within/add:pointer-events-auto group-focus-within/add:scale-100 group-focus-within/add:opacity-100',
         )}
         onClick={() => onAddPage(afterPageId)}
