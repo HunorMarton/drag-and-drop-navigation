@@ -1,4 +1,5 @@
 import { Icon, type IconName, type IconVariant } from '@workspace/icons'
+import { cn } from '@workspace/ui'
 
 export function PageButtonContent({
   icon,
@@ -14,10 +15,22 @@ export function PageButtonContent({
   return (
     <>
       <div className="flex items-center gap-1.5">
-        <Icon icon={icon} variant={iconVariant} />
+        <Icon
+          icon={icon}
+          variant={iconVariant}
+          className="transition-all duration-300 ease-out"
+        />
         <span>{label}</span>
       </div>
-      {isActive && <Icon icon="moreVertical" variant="gray" />}
+      <Icon
+        icon="moreVertical"
+        variant="gray"
+        size={isActive ? 'default' : 'hidden'}
+        className={cn(
+          'transition-all duration-300 ease-out',
+          isActive ? 'opacity-100' : 'opacity-0',
+        )}
+      />
     </>
   )
 }
